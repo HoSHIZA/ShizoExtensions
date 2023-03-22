@@ -1,0 +1,23 @@
+﻿{
+  "name": "com.shizogames.extensions",
+  "version": "1.0.0",
+  "displayName": "Extensions",
+  "description": "Powerful and useful extensions for most Unity classes.",
+  "unity": "2019.3",
+  "documentationUrl": "",
+  "dependencies": {
+    "com.unity.ugui": "1.0.0"
+  },
+  "optionalDependencies": {},
+  "keywords": [
+    "Shizo",
+    "ShizoGames",
+    "Extensions",
+    "Unity Extensions"
+  ],
+  "author": {
+    "name": "ShizoGames",
+    "email": "hoshiza78@gmail.com",
+    "url": "https://hoshiza.itch.io"
+  }
+}
