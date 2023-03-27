@@ -2,7 +2,7 @@
   "name": "com.shizogames.extensions",
   "version": "1.0.0",
   "displayName": "Extensions",
-  "description": "Powerful and useful extensions for most Unity classes.",
+  "description": "Powerful and useful extensions for most Unity classes and structures.",
   "unity": "2019.3",
   "documentationUrl": "",
   "dependencies": {
@@ -18,6 +18,6 @@
   "author": {
     "name": "ShizoGames",
     "email": "hoshiza78@gmail.com",
-    "url": "https://hoshiza.itch.io"
+    "url": "https://github.com/HoSHIZA"
   }
 }
