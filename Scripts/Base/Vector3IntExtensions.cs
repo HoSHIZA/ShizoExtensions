@@ -358,7 +358,7 @@ namespace ShizoGames.Extensions.Base
         /// <returns>A Vector3Int with each component replaced by its absolute value.</returns>
         public static Vector3Int Abs(this Vector3Int vector)
         {
-            return new Vector3Int(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
+            return new Vector3Int(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
         }
 
         /// <summary>
@@ -418,7 +418,7 @@ namespace ShizoGames.Extensions.Base
         /// <returns>The clamped vector.</returns>
         public static Vector3Int Clamp(this Vector3Int vector, int min, int max)
         {
-            return new Vector3Int(Mathf.Clamp(vector.x, min, max), Mathf.Clamp(vector.y, min, max));
+            return new Vector3Int(Mathf.Clamp(vector.x, min, max), Mathf.Clamp(vector.y, min, max), Mathf.Clamp(vector.z, min, max));
         }
 
         /// <summary>
