@@ -115,5 +115,58 @@ namespace ShizoGames.Extensions
         {
             return component = gameObject.GetComponentInParent(type, includeInactive);
         }
+        
+        /// <summary>
+        /// Set the enabled MonoBehaviour of type T, if it exists.
+        /// </summary>
+        /// <typeparam name="T">Component type to enable or disable.</typeparam>
+        /// <param name="gameObject">Target game object.</param>
+        /// <param name="enable">Enable or disable component.</param>
+        /// <returns><c>true</c> if the component exists; otherwise, <c>false</c>.</returns>
+        public static bool EnableComponentIfExists<T>(this GameObject gameObject, bool enable = true) where T : MonoBehaviour
+        {
+            if (!gameObject.TryGetComponent<T>(out var component)) return false;
+
+            component.enabled = enable;
+
+            return true;
+        }
+        
+        /// <summary>
+        /// Set the enabled MonoBehaviour of declared type, if it exists.
+        /// </summary>
+        /// <param name="gameObject">Target game object.</param>
+        /// <param name="type">Component type to enable or disable.</param>
+        /// <param name="enable">Enable or disable component.</param>
+        /// <returns><c>true</c> if the component exists; otherwise, <c>false</c>.</returns>
+        public static bool EnableComponentIfExists(this GameObject gameObject, Type type, bool enable = true)
+        {
+            if (!gameObject.TryGetComponent(type, out var component)) return false;
+            
+            var monoBehaviour = (MonoBehaviour)component;
+            monoBehaviour.enabled = enable;
+
+            return true;
+        }
+        
+        /// <summary>
+        /// Sets the layer for all child elements.
+        /// </summary>
+        /// <param name="gameObject">The game object to setting up.</param>
+        /// <param name="layer">Layer to install.</param>
+        public static void SetLayerForAllChildren(this GameObject gameObject, int layer)
+        {
+            SetLayerRecursive(gameObject.transform, layer);
+            
+            static void SetLayerRecursive(Transform transform, int layer)
+            {
+                transform.gameObject.layer = layer;
+                
+                foreach (Transform o in transform)
+                {
+                    SetLayerRecursive(o, layer);
+                }
+            }
+        }
     }
 }
