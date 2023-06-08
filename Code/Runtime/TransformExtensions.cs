@@ -1,7 +1,7 @@
-﻿using ShizoGames.Extensions.Base;
+﻿using ShizoGames.ShizoExtensions.Base;
 using UnityEngine;
 
-namespace ShizoGames.Extensions
+namespace ShizoGames.ShizoExtensions
 {
     /// <summary>
     /// Provides extension methods for the <see cref="Transform"/> class.

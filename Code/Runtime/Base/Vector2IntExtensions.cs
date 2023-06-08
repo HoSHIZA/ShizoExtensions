@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShizoGames.Extensions.Base
+namespace ShizoGames.ShizoExtensions.Base
 {
     /// <summary>
     /// Provides extension methods for the <see cref="Vector2Int"/> struct.

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ShizoGames.Extensions
+namespace ShizoGames.ShizoExtensions
 {
     /// <summary>
     /// Provides extension methods to modify RectTransform properties.

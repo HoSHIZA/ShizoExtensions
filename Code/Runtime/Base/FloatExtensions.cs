@@ -1,4 +1,4 @@
-﻿namespace ShizoGames.Extensions.Base
+﻿namespace ShizoGames.ShizoExtensions.Base
 {
     public static class FloatExtensions
     {

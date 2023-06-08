@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ShizoGames.Extensions
+namespace ShizoGames.ShizoExtensions
 {
     /// <summary>
     /// Provides extension methods for the <see cref="Graphic"/> class.

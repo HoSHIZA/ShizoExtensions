@@ -1,10 +1,11 @@
-﻿#if ENABLE_INPUT_SYSTEM
-using UnityEngine;
+﻿
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine;
 #endif
 
-namespace KDebugger.Plugins.ShizoGames.Extensions
+namespace ShizoGames.ShizoExtensions
 {
     public static class InputExtensions
     {
