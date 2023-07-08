@@ -27,18 +27,15 @@ jobs:
         run: |
           find . -type f -name '*.cs' -exec sed -i 's/namespace ShizoGames/namespace KDebugger.Plugins.ShizoGames/g' {} +
 
-      - name: Delete Asmdef Files
+      - name: Replace Editor Files
         run: |
-          find . -type f \( -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -o -regex '.*/ShizoGames\.\(.*\)\.Editor.asmdef' \) -exec bash -c 'rm "$0"' {} +
-          find . -type d -empty -delete
+          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "${0/\.Editor\.asmdef/.Editor.References.asmref}"' {} +
+          find . -type f -name 'ShizoGames.*.Editor.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins.Editor\" }" > "$0"' {} +
 
-      - name: Create KDebugger.Plugins.Reference.asmref
+      - name: Replace Files without Editor
         run: |
-          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -execdir bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
-
-      - name: Create KDebugger.Plugins.Editor.Reference.asmref
-        run: |
-          find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -execdir bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
+          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "${0/\.asmdef/.References.asmref}"' {} +
+          find . -type f -name 'ShizoGames.*.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins\" }" > "$0"' {} +
 
       - name: Push Branch
         run: |
