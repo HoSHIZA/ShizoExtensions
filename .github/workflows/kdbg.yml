@@ -29,19 +29,19 @@ jobs:
 
       - name: Update Runtime Asmdef
         run: |
-          find . -type f -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(?!.*\.Editor\)\(.*\).asmdef/KDebugger.Plugins.Reference.asmdef}"' {} +
+          find . -type f -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(?!.*\.Editor\)\(.*\).asmdef/KDebugger.Plugins.Reference.asmref}"' {} +
 
       - name: Update Editor Asmdef
         run: |
           find . -type f -regex '.*/ShizoGames\.\(.*\)\.Editor.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(.*\)\.Editor.asmdef/KDebugger.Plugins.Editor.asmdef}"' {} +
 
-      - name: Update KDebugger.Plugins.Reference.asmref
+      - name: Replace KDebugger.Plugins.Reference.asmref
         run: |
-          find . -type f -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "${0/\.asmdef/.Reference.asmref}"' {} +
+          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
 
-      - name: Update KDebugger.Plugins.Editor.Reference.asmref
+      - name: Replace KDebugger.Plugins.Editor.Reference.asmref
         run: |
-          find . -type f -regex '.*/ShizoGames\.\(.*\)\.Editor.asmdef' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "${0/\.asmdef/.Editor.Reference.asmref}"' {} +
+          find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
 
       - name: Push Branch
         run: |
