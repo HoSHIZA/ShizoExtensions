@@ -1,4 +1,4 @@
-name: Update Namespaces and Files
+name: KDebugger Ready
 
 on:
   push:
@@ -6,42 +6,35 @@ on:
       - master
 
 jobs:
-  update_namespaces:
+  update_branch:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Create Branch
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git checkout -b kdbg
 
       - name: Update Namespaces
         run: |
           find . -type f -name '*.cs' -exec sed -i 's/namespace ShizoGames/namespace KDebugger.Plugins.ShizoGames/g' {} +
 
-  update_files:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Update Files
+      - name: Update Runtime Asmdef
         run: |
           find . -type f -regex '.*ShizoGames\.(?!.*\.Editor)(.+)\.asmdef' -exec sh -c 'mv "$1" "KDebugger.${1#ShizoGames.}.asmref"' _ {} \;
           find . -type f -name '*.asmref' -exec sed -i 's/{\r?\n\s*"reference":\s*"KDebugger.Plugins"\r?\n}/{\r\n    "reference": "KDebugger.Plugins"\r\n}/' {} +
 
-  update_branch:
-    needs: [update_namespaces, update_files]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Update Branch
+      - name: Update Editor Asmdef
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git checkout -b kdbg
+          find . -type f -regex '.*ShizoGames\.(.+)\.Editor.asmdef' -exec sh -c 'mv "$1" "KDebugger.${1#ShizoGames.}.Editor.asmref"' _ {} \;
+          find . -type f -name '*.Editor.asmref' -exec sed -i 's/{\r?\n\s*"reference":\s*"KDebugger.Plugins.Editor"\r?\n}/{\r\n    "reference": "KDebugger.Plugins.Editor"\r\n}/' {} +
+
+      - name: Push Branch
+        run: |
           git add .
-          git commit -m "Update namespaces and files"
+          git commit -m "KDebugger Ready"
           git push origin kdbg
