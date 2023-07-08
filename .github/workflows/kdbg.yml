@@ -35,7 +35,7 @@ jobs:
       - name: Replace Editor Asmdef
         run: |
           find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "KDebugger.Plugins.Reference.asmref"' {} +
-          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
+          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins\" }" > "$0"' {} +
 
       - name: Remove .asmdef.meta Files
         run: |
