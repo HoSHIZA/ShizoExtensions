@@ -29,12 +29,12 @@ jobs:
 
       - name: Replace Editor Files
         run: |
-          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "${KDebugger.Plugins.Editor.Reference.asmref}"' {} +
+          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "KDebugger.Plugins.Editor.Reference.asmref"' {} +
           find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
 
       - name: Replace Files without Editor
         run: |
-          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "${KDebugger.Plugins.Reference.asmref}"' {} +
+          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "KDebugger.Plugins.Reference.asmref"' {} +
           find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
 
       - name: Push Branch
