@@ -13,10 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create Branch
+      - name: Delete Existing Branch
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
+          git push origin --delete kdbg || echo "Branch 'kdbg' does not exist"
+
+      - name: Create Branch
+        run: |
           git checkout -b kdbg
 
       - name: Update Namespaces
@@ -25,14 +29,18 @@ jobs:
 
       - name: Update Runtime Asmdef
         run: |
-          find . -type f -regex '.*ShizoGames\.(?!.*\.Editor)(.+)\.asmdef' -exec sh -c 'mv "$1" "KDebugger.${1#ShizoGames.}.asmref"' _ {} \;
-          find . -type f -name '*.asmref' -exec sed -i 's/{\r?\n\s*"reference":\s*"KDebugger.Plugins"\r?\n}/{\r\n    "reference": "KDebugger.Plugins"\r\n}/' {} +
-
+          find . -type f -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(?!.*\.Editor\)\(.*\).asmdef/KDebugger.Plugins.Reference.asmref}"' {} +
+          echo '{
+            "reference": "KDebugger.Plugins"
+          }' > KDebugger.Plugins.Reference.asmref
+          
       - name: Update Editor Asmdef
         run: |
-          find . -type f -regex '.*ShizoGames\.(.+)\.Editor.asmdef' -exec sh -c 'mv "$1" "KDebugger.${1#ShizoGames.}.Editor.asmref"' _ {} \;
-          find . -type f -name '*.Editor.asmref' -exec sed -i 's/{\r?\n\s*"reference":\s*"KDebugger.Plugins.Editor"\r?\n}/{\r\n    "reference": "KDebugger.Plugins.Editor"\r\n}/' {} +
-
+          find . -type f -regex '.*/ShizoGames\.\(.*\)\.Editor.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(.*\)\.Editor.asmdef/KDebugger.Plugins.Editor.Reference.asmdef}"' {} +
+          echo '{
+            "reference": "KDebugger.Plugins.Editor"
+          }' > KDebugger.Plugins.Editor.Reference.asmref
+          
       - name: Push Branch
         run: |
           git add .
