@@ -30,17 +30,13 @@ jobs:
       - name: Update Runtime Asmdef
         run: |
           find . -type f -regex '.*/ShizoGames\.\(?!.*\.Editor\)\(.*\)\.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(?!.*\.Editor\)\(.*\).asmdef/KDebugger.Plugins.Reference.asmref}"' {} +
-          echo '{
-            "reference": "KDebugger.Plugins"
-          }' > KDebugger.Plugins.Reference.asmref
+          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
           
       - name: Update Editor Asmdef
         run: |
           find . -type f -regex '.*/ShizoGames\.\(.*\)\.Editor.asmdef' -exec bash -c 'mv "$0" "${0/ShizoGames.\(.*\)\.Editor.asmdef/KDebugger.Plugins.Editor.Reference.asmdef}"' {} +
-          echo '{
-            "reference": "KDebugger.Plugins.Editor"
-          }' > KDebugger.Plugins.Editor.Reference.asmref
-          
+          find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
+
       - name: Push Branch
         run: |
           git add .
