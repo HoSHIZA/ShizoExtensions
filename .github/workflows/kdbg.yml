@@ -29,13 +29,13 @@ jobs:
 
       - name: Replace Editor Files
         run: |
-          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'newname=$(echo "$0" | sed "s/\.Editor\.asmdef/.Editor.References.asmref/"); mv "$0" "$newname"' {} +
-          find . -type f -name 'ShizoGames.*.Editor.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins.Editor\" }" > "$0"' {} +
+          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "${KDebugger.Plugins.Editor.Reference.asmref}"' {} +
+          find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
 
       - name: Replace Files without Editor
         run: |
-          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'newname=$(echo "$0" | sed "s/\.asmdef/.References.asmref/"); mv "$0" "$newname"' {} +
-          find . -type f -name 'ShizoGames.*.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins\" }" > "$0"' {} +
+          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "${KDebugger.Plugins.Reference.asmref}"' {} +
+          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins\"\n}" > "$0"' {} +
 
       - name: Push Branch
         run: |
