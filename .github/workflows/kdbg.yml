@@ -1,4 +1,4 @@
-name: KDebugger Ready
+name: Update Namespaces and Files
 
 on:
   push:
@@ -6,20 +6,42 @@ on:
       - master
 
 jobs:
-  replace_namespace:
+  update_namespaces:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Replace Namespace
+      - name: Update Namespaces
         run: |
-          git checkout master
           find . -type f -name '*.cs' -exec sed -i 's/namespace ShizoGames/namespace KDebugger.Plugins.ShizoGames/g' {} +
+
+  update_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update Files
+        run: |
+          find . -type f -regex '.*ShizoGames\.(?!.*\.Editor)(.+)\.asmdef' -exec sh -c 'mv "$1" "KDebugger.${1#ShizoGames.}.asmref"' _ {} \;
+          find . -type f -name '*.asmref' -exec sed -i 's/{\r?\n\s*"reference":\s*"KDebugger.Plugins"\r?\n}/{\r\n    "reference": "KDebugger.Plugins"\r\n}/' {} +
+
+  update_branch:
+    needs: [update_namespaces, update_files]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update Branch
+        run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git commit -a -m "KDebugger Ready"
-          git branch -D kdbg
           git checkout -b kdbg
-          git push --set-upstream origin kdbg
+          git add .
+          git commit -m "Update namespaces and files"
+          git push origin kdbg
