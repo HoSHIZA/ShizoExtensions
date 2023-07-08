@@ -30,7 +30,7 @@ jobs:
       - name: Replace Editor Files
         run: |
           find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "${0/\.Editor\.asmdef/.Editor.References.asmref}"' {} +
-          find . -type f -name 'ShizoGames.*.Editor.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins.Editor\" }" > "$0"' {} +
+          find . -type f -name 'KDebugger.Plugins.*.Editor.References.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins.Editor\" }" > "$0"' {} +
 
       - name: Replace Files without Editor
         run: |
