@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShizoGames.ShizoExtensions.Base
+namespace KDebugger.Plugins.ShizoGames.ShizoExtensions.Base
 {
     /// <summary>
     /// Provides extension methods for the <see cref="Color"/> struct.

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ShizoGames.ShizoExtensions
+namespace KDebugger.Plugins.ShizoGames.ShizoExtensions
 {
     /// <summary>
     /// Provides extension methods for working with Unity's layout system.

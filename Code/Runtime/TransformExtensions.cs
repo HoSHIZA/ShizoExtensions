@@ -1,7 +1,7 @@
-﻿using ShizoGames.ShizoExtensions.Base;
+﻿using KDebugger.Plugins.ShizoGames.ShizoExtensions.Base;
 using UnityEngine;
 
-namespace ShizoGames.ShizoExtensions
+namespace KDebugger.Plugins.ShizoGames.ShizoExtensions
 {
     /// <summary>
     /// Provides extension methods for the <see cref="Transform"/> class.

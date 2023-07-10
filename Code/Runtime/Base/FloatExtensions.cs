@@ -1,4 +1,4 @@
-﻿namespace ShizoGames.ShizoExtensions.Base
+﻿namespace KDebugger.Plugins.ShizoGames.ShizoExtensions.Base
 {
     public static class FloatExtensions
     {

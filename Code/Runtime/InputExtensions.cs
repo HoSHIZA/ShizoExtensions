@@ -4,7 +4,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine;
 #endif
 
-namespace ShizoGames.ShizoExtensions
+namespace KDebugger.Plugins.ShizoGames.ShizoExtensions
 {
     public static class InputExtensions
     {
